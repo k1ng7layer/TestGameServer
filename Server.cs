@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace TestGameServer;
+﻿namespace TestGameServer;
 
 public class Server : IDisposable
 {
@@ -15,6 +13,8 @@ public class Server : IDisposable
     {
         _transport = transport;
     }
+
+    public IReadOnlyDictionary<int, NetClient> NetClients => _netClients;
 
     public void Start()
     {
