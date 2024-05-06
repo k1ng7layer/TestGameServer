@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace TestGameServer.Game.Helpers;
+﻿namespace TestGameServer.Game.Helpers;
 
 public class LevelGeometry
 {
@@ -9,14 +7,20 @@ public class LevelGeometry
 
 public class Triangle
 {
-    public Vector3 V1;
-    public Vector3 V2;
-    public Vector3 V3;
+    public HalfEdge HalfEdge;
+    public Vertex Vertex1;
+    public Vertex Vertex2;
+    public Vertex Vertex3;
 
-    public Triangle(Vector3 v1, Vector3 v2, Vector3 v3)
+    public Triangle(Vertex vertex1, Vertex vertex2, Vertex vertex3)
     {
-        V1 = v1;
-        V2 = v2;
-        V3 = v3;
+        Vertex1 = vertex1;
+        Vertex2 = vertex2;
+        Vertex3 = vertex3;
+    }
+    
+    public void ChangeOrientation()
+    {
+        (Vertex1, Vertex2) = (Vertex2, Vertex1);
     }
 }

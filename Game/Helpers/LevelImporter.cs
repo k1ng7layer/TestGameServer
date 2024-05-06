@@ -4,7 +4,7 @@ namespace TestGameServer.Game.Helpers;
 
 public static class LevelImporter
 {
-    public static List<Triangle> LoadGeometry(string path)
+    public static List<Triangle> LoadGeometryFromFile(string path)
     {
         var lines = File.ReadAllLines(path);
 
@@ -30,17 +30,15 @@ public static class LevelImporter
         
         for (int i = 0; i < faces.Count ; i+=3)
         {
-            if (i == 48)
-                Console.WriteLine($"i = {i}");
             var vertex1Id = faces[i];
             var vertex2Id = faces[i + 1];
             var vertex3Id = faces[i + 2];
             
-            var v1 = vertices[vertex1Id - 1];
-            var v2 = vertices[vertex2Id - 1];
-            var v3 = vertices[vertex3Id - 1];
+            var v1 = vertices[vertex1Id];
+            var v2 = vertices[vertex2Id];
+            var v3 = vertices[vertex3Id];
 
-            var triangle = new Triangle(v1, v2, v3);
+            var triangle = new Triangle(new Vertex(v1), new Vertex(v2), new Vertex(v3));
             triangles.Add(triangle);
         }
         
@@ -85,7 +83,6 @@ public static class LevelImporter
         var facesStr = line
             .Replace("f ", " ")
             .TrimStart()
-            // .Substring(2, line.Length - 2)
             .Split(' ');
 
         if (facesStr.Length != 3)
@@ -102,7 +99,7 @@ public static class LevelImporter
                 if (!int.TryParse(facesVert, out var vertIndex))
                     throw new Exception("Cant parse face verts");
                 
-                faces.Add(vertIndex);
+                faces.Add(vertIndex - 1);
                 break;
             }
         }
