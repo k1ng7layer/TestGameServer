@@ -6,19 +6,15 @@ namespace OBB
     [Serializable]
     public class Cube
     {
-        public int Id;
         public Vector3 Position;
-        
         public Quaternion Rotation;
-        public Vector3 Velocity;
         
-        public Vector3 Size { get; }
-
         public Cube(Vector3 size)
         {
             Size = size;
         }
-
+        
+        public Vector3 Size { get; }
         public Vector3 Forward => Vector3.Transform(Vector3.UnitZ, Rotation);
         public Vector3 Up => Vector3.Transform(Vector3.UnitY, Rotation);
         public Vector3 Right => Vector3.Transform(Vector3.UnitX, Rotation);
@@ -98,7 +94,7 @@ namespace OBB
         {
             var rows = matrix4x4.GetUpperBound(0) + 1;
             var columns = matrix4x4.Length / rows;
-            float[] result = new float[4];
+            var result = new float[4];
             for (int i = 0; i < rows; i++)
             {
                 result[i] = 0;
