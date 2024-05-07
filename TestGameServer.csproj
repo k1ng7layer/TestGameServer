@@ -16,6 +16,7 @@
 
     <ItemGroup>
       <PackageReference Include="LiteNetLib" Version="1.2.0" />
+      <PackageReference Include="Scellecs.Morpeh" Version="2023.1.0" />
     </ItemGroup>
 
 </Project>
