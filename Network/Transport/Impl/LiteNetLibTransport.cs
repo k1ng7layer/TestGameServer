@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using LiteNetLib;
 using LiteNetLib.Utils;
 
-namespace TestGameServer;
+namespace TestGameServer.Network.Transport.Impl;
 
 public class LiteNetLibTransport : Transport, INetEventListener
 {

@@ -1,15 +1,15 @@
-﻿namespace TestGameServer;
+﻿namespace TestGameServer.Network;
 
-public class Server : IDisposable
+public class NetworkServer : IDisposable
 {
     private readonly Queue<OutcomePendingMessage> _outcomePendingMessages = new();
     private readonly Queue<IncomePendingMessage> _incomePendingMessages = new();
-    private readonly Transport _transport;
+    private readonly Transport.Transport _transport;
     private readonly Dictionary<int, NetClient> _netClients = new();
     
     private bool _running;
 
-    public Server(Transport transport)
+    public NetworkServer(Transport.Transport transport)
     {
         _transport = transport;
     }

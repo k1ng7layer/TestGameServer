@@ -1,6 +1,8 @@
-﻿using System.Numerics;
+﻿using System.Globalization;
+using System.Numerics;
+using TestGameServer.Game.Helpers;
 
-namespace TestGameServer.Game.Helpers;
+namespace TestGameServer.Game.Services.Helpers;
 
 public static class LevelImporter
 {
@@ -62,7 +64,7 @@ public static class LevelImporter
         {
             var valueStr = subLines[i];
             
-            if (!float.TryParse(valueStr, out var value))
+            if (!float.TryParse(valueStr, NumberStyles.Any, CultureInfo.InvariantCulture, out var value))
                 continue;
 
             if (i == 0)

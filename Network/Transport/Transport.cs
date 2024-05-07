@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace TestGameServer;
+namespace TestGameServer.Network.Transport;
 
 public abstract class Transport : IDisposable
 {
