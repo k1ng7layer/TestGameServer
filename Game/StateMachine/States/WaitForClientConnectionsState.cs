@@ -1,4 +1,4 @@
-﻿using TestGameServer.Game.Config;
+﻿using TestGameServer.Game.Config.Game;
 using TestGameServer.Game.Services.SessionHolder;
 using TestGameServer.MessageDispatcher;
 
@@ -7,18 +7,18 @@ namespace TestGameServer.Game.StateMachine.States;
 public class WaitForClientConnectionsState : State
 {
     private readonly INetworkMessageDispatcher _networkMessageDispatcher;
-    private readonly IGameConfiguration _gameConfiguration;
+    private readonly IGameConfiguration _configuration;
     private readonly SessionProvider _sessionProvider;
     private TaskCompletionSource _completionSource;
 
     public WaitForClientConnectionsState(
         INetworkMessageDispatcher networkMessageDispatcher,
-        IGameConfiguration gameConfiguration,
+        IGameConfiguration configuration,
         SessionProvider sessionProvider
     )
     {
         _networkMessageDispatcher = networkMessageDispatcher;
-        _gameConfiguration = gameConfiguration;
+        _configuration = configuration;
         _sessionProvider = sessionProvider;
     }
 
@@ -34,7 +34,7 @@ public class WaitForClientConnectionsState : State
 
     private void OnPlayerConnected()
     {
-        if (_sessionProvider.Session.Players.Count == _gameConfiguration.RequiredPlayers)
+        if (_sessionProvider.Session.Players.Count == _configuration.MaxPlayers)
             _completionSource.SetResult();
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
-using OBB;
 
-namespace TestGameServer.Game;
+namespace TestGameServer.Game.Models;
 
 public class GameObject
 {
