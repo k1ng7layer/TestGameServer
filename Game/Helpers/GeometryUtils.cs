@@ -143,4 +143,61 @@ public static class GeometryUtils
 
         return isIntersecting;
     }
+    
+    public static bool IsPointInTriangle(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p)
+    {
+        bool isWithinTriangle = false;
+
+        //Based on Barycentric coordinates
+        float denominator = ((p2.Y - p3.Y) * (p1.X - p3.X) + (p3.X - p2.X) * (p1.Y - p3.Y));
+
+        float a = ((p2.Y - p3.Y) * (p.X - p3.X) + (p3.X - p2.X) * (p.Y - p3.Y)) / denominator;
+        float b = ((p3.Y - p1.Y) * (p.X - p3.X) + (p1.X - p3.X) * (p.Y - p3.Y)) / denominator;
+        float c = 1 - a - b;
+
+        //The point is within the triangle or on the border if 0 <= a <= 1 and 0 <= b <= 1 and 0 <= c <= 1
+        if (a >= 0f && a <= 1f && b >= 0f && b <= 1f && c >= 0f && c <= 1f)
+        {
+            isWithinTriangle = true;
+        }
+
+        //The point is within the triangle
+        if (a > 0f && a < 1f && b > 0f && b < 1f && c > 0f && c < 1f)
+        {
+            isWithinTriangle = true;
+        }
+
+        return isWithinTriangle;
+    }
+    
+    public static Vector2 FindNearestPointOnLine(Vector2 origin, Vector2 end, Vector2 point)
+    {
+        //Get heading
+        Vector2 heading = (end - origin);
+        float magnitudeMax = heading.Length();
+        heading = Vector2.Normalize(heading);
+
+        //Do projection from the point but clamp it
+        Vector2 lhs = point - origin;
+        float dotP = Vector2.Dot(lhs, heading);
+        dotP = Math.Clamp(dotP, 0f, magnitudeMax);
+        return origin + heading * dotP;
+    }
+    
+    public static Vector2 CalculateCenterOfTriangle(Triangle triangle)
+    {
+        var x = (triangle.Vertex1.Position.X + triangle.Vertex2.Position.X + triangle.Vertex3.Position.X) / 3f;
+        var y = (triangle.Vertex1.Position.Y + triangle.Vertex2.Position.Y + triangle.Vertex3.Position.Y) / 3f;
+
+        return new Vector2(x, y);
+    }
+    
+    public static bool IsTriangleHasVertex(Vertex a, Triangle triangle)
+    {
+        if (a.Position == triangle.Vertex1.Position || a.Position == triangle.Vertex2.Position ||
+            a.Position == triangle.Vertex3.Position)
+            return true;
+
+        return false;
+    }
 }
