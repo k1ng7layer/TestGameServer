@@ -46,7 +46,7 @@ public class Bootstrap : IDisposable
             await Task.Delay(_tickRate);
             
             var deltaTime = (float)(DateTime.UtcNow - _lastTime).TotalSeconds;
-            Console.WriteLine($"tick: {deltaTime}");
+            //Console.WriteLine($"tick: {deltaTime}");
             
             _networkServer.Tick();
             _gameCore.Tick(deltaTime);

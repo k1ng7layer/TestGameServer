@@ -69,6 +69,13 @@ public class ByteWriter
             WritePos += bytes.Length;
         }
         
+        public void AddByte(byte value)
+        {
+            CheckSpaceAndCopy(1);
+            
+            Data[WritePos++] = value;
+        }
+        
         public void AddUshort(ushort value)
         {
             CheckSpaceAndCopy(2);

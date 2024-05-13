@@ -1,6 +1,4 @@
-﻿using TestGameServer.Game.Helpers;
-
-namespace TestGameServer.Game;
+﻿namespace TestGameServer.Game.Models;
 
 public class Scene
 {

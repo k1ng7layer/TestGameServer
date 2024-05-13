@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace TestGameServer;
+namespace TestGameServer.Network.Helpers;
 
 public class SegmentByteReader
 {
@@ -54,13 +54,13 @@ public class SegmentByteReader
         return result;
     }
 
-    public byte[] ReadBytes(int count)
+    public ArraySegment<byte> ReadBytes(int count)
     {
         if (_readPosition + count > _arraySegment.Count)
             throw new IndexOutOfRangeException();
             
-        var value =  _arraySegment.Slice(_readPosition, count).ToArray();
-        _readPosition += value.Length;
+        var value =  _arraySegment.Slice(_readPosition, count);
+        _readPosition += count;
 
         return value;
     }

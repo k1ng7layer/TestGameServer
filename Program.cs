@@ -1,9 +1,11 @@
 ﻿using System.Net;
+using System.Numerics;
 using TestGameServer;
 using TestGameServer.Game;
 using TestGameServer.Game.Config.Game.Impl;
 using TestGameServer.Game.Services.Pathfinding.Impl;
-using TestGameServer.MessageDispatcher.Impl;
+using TestGameServer.Messaging.MessageHandlers.Impl;
+using TestGameServer.Messaging.MessageHandlers.Serialization.Impl;
 using TestGameServer.Network;
 using TestGameServer.Network.Transport.Impl;
 
@@ -46,17 +48,21 @@ using TestGameServer.Network.Transport.Impl;
 // server.Dispose();
 
 var transport = new LiteNetLibTransport(new IPEndPoint(IPAddress.Any, 5555));
-var dispatcher = new NetworkMessageDispatcher();
+var networkHandlersService = new MessageHandler(new JsonSerializer());
 var pathFindingService = new AStarPathfindingService();
-
-var networkServer = new NetworkServer(transport);
-var gameCore = new GameCore(dispatcher, pathFindingService);
+var networkServer = new NetworkServer(transport, networkHandlersService);
 
 var config = new GameConfiguration
 {
-    TickRatePerSec = 10
+    TickRatePerSec = 10,
+    BlueTeamMinionsSpawnPoint = new Vector3(19f, 0f, 0f),
+    RedTeamMinionsSpawnPoint = new Vector3(-19f, 0f, 0f),
+    MinionsInWave = 6,
+    MinionsWaveSpawnTimeSec = 2f,
+    MaxPlayers = 1
 };
 
+var gameCore = new GameCore(networkHandlersService, pathFindingService, config, networkServer);
 var bootstrap = new Bootstrap(config, gameCore, networkServer);
 
 bootstrap.Initialize();

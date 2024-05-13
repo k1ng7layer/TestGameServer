@@ -11,7 +11,7 @@ public class AStarPathfindingService : IPathfindingService
     
     public void Initialize()
     {
-        var path = Path.GetFullPath(@"/Users/paata/Documents/GitRepositories/SampleNetClientDemo/Assets/NavmeshExportNavMesh.obj");
+        var path = Path.GetFullPath(@"C:\Users\patat\Documents\UnityProjects\SampleNetClient\Assets\NavmeshExportNavMesh.obj");
         var geometry = LevelImporter.LoadGeometryFromFile(path);
         
         _navmesh = new Navmesh
@@ -48,7 +48,6 @@ public class AStarPathfindingService : IPathfindingService
 
             foreach (var neighbour in current.Neighbours)
             {
-                   
                 var newCost = current.CostFromOrigin + EstimateCost(current, neighbour);
 
                 if (newCost < neighbour.CostFromOrigin)

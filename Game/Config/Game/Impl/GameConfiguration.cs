@@ -6,6 +6,8 @@ public class GameConfiguration : IGameConfiguration
 {
     public Vector3 RedTeamMinionsSpawnPoint { get; set; }
     public Vector3 BlueTeamMinionsSpawnPoint { get; set; }
+    public int MinionsInWave { get; set; }
+    public float MinionsWaveSpawnTimeSec { get; set; }
     public int MaxPlayers { get; set; }
     public int TickRatePerSec { get; set; }
 }

@@ -1,6 +1,8 @@
-﻿namespace TestGameServer;
+﻿using TestGameServer.Network.Utils;
 
-public static class MessageHelper
+namespace TestGameServer.Network.Helpers;
+
+public static class ServerMessageHelper
 {
     internal static ENetworkMessageType ReadMessageType(ArraySegment<byte> data)
     {

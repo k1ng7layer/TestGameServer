@@ -2,13 +2,8 @@
 
 namespace TestGameServer.Game.Ecs.Core;
 
-public abstract class InitializeSystem : IInitializer
+public abstract class InitializeSystem : System, IInitializer
 {
-    public World World { get; set; }
-    
-    public virtual void Dispose()
-    { }
-
-    public abstract void OnAwake();
+   
 
 }

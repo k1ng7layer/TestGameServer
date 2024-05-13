@@ -1,26 +1,19 @@
-﻿using Scellecs.Morpeh;
-using TestGameServer.MessageDispatcher;
+﻿using TestGameServer.Game.Ecs.Core;
+using TestGameServer.Messaging.MessageHandlers;
 
 namespace TestGameServer.Game.Ecs.Systems;
 
-public class PlayerInputSystem : IInitializer
+public class PlayerInputSystem : InitializeSystem
 {
-    private readonly INetworkMessageDispatcher _networkMessageDispatcher;
+    private readonly INetMessageHandler _netMessageHandler;
 
-    public PlayerInputSystem(INetworkMessageDispatcher networkMessageDispatcher)
+    public PlayerInputSystem(INetMessageHandler netMessageHandler)
     {
-        _networkMessageDispatcher = networkMessageDispatcher;
-    }
-    
-    public void Dispose()
-    {
-        
+        _netMessageHandler = netMessageHandler;
     }
 
-    public void OnAwake()
+    public override void OnAwake()
     {
-        
+        Console.WriteLine("OnAwake");
     }
-
-    public World World { get; set; }
 }

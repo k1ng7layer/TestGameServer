@@ -1,4 +1,4 @@
-﻿namespace TestGameServer;
+﻿namespace TestGameServer.Network.Utils;
 
 public enum ENetworkMessageType
 {
@@ -13,5 +13,6 @@ public enum ENetworkMessageType
     ServerAliveCheck,
     Ping,
     Sync,
+    Custom,
     None
 }
